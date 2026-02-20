@@ -1,0 +1,601 @@
+/*
+Theme Name:  Creative Tech Tutorials
+Description: Child theme for Hello Elementor — Creative Technology Tutorials
+             covering Bare Conductive, After Effects, TouchDesigner, Photoshop & more.
+Author:      Your Name
+Author URI:  https://yoursite.com
+Template:    hello-elementor
+Version:     2.0.0
+License:     GNU General Public License v2 or later
+Text Domain: creative-tech
+*/
+
+/* ============================================================
+   GLOBAL VARIABLES
+   ============================================================ */
+:root {
+    /* Brand */
+    --ct-blue:        #00a8e1;
+    --ct-blue-dark:   #0077a8;
+    --ct-dark:        #111827;
+    --ct-light:       #f5f7fa;
+    --ct-border:      #e5e7eb;
+    --ct-text:        #374151;
+    --ct-muted:       #6b7280;
+    --ct-white:       #ffffff;
+    --ct-gradient:    linear-gradient(135deg, #00a8e1 0%, #0077a8 100%);
+
+    /* Tool brand colours */
+    --tool-ae:        #9999ff;   /* After Effects */
+    --tool-ae-bg:     #1a1a3e;
+    --tool-td:        #1a1a2e;   /* TouchDesigner */
+    --tool-td-accent: #00d4ff;
+    --tool-ps:        #31a8ff;   /* Photoshop */
+    --tool-ps-bg:     #001e36;
+    --tool-arduino:   #00979d;   /* Arduino / Bare Conductive */
+    --tool-arduino-bg:#e8f7f8;
+    --tool-blender:   #e87d0d;   /* Blender */
+    --tool-blender-bg:#fff3e8;
+    --tool-python:    #3776ab;   /* Python */
+    --tool-python-bg: #e8f0f8;
+    --tool-max:       #595959;   /* Max/MSP */
+    --tool-max-bg:    #efefef;
+    --tool-unity:     #222c37;   /* Unity */
+    --tool-unity-bg:  #e8eaec;
+    --tool-default:   #6b7280;
+    --tool-default-bg:#f3f4f6;
+}
+
+/* ============================================================
+   DIFFICULTY BADGES
+   ============================================================ */
+.ct-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.ct-badge--getting-started { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.ct-badge--beginner         { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.ct-badge--intermediate     { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+.ct-badge--advanced         { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* ============================================================
+   TOOL BADGES  (shown on cards and single pages)
+   ============================================================ */
+.ct-tool-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+.ct-tool-badge:hover { opacity: 0.85; }
+
+.ct-tool-badge--after-effects    { background: var(--tool-ae-bg);     color: var(--tool-ae); }
+.ct-tool-badge--touchdesigner    { background: var(--tool-td);        color: var(--tool-td-accent); }
+.ct-tool-badge--photoshop        { background: var(--tool-ps-bg);     color: var(--tool-ps); }
+.ct-tool-badge--bare-conductive,
+.ct-tool-badge--arduino          { background: var(--tool-arduino-bg);color: var(--tool-arduino); }
+.ct-tool-badge--blender          { background: var(--tool-blender-bg);color: var(--tool-blender); }
+.ct-tool-badge--python           { background: var(--tool-python-bg); color: var(--tool-python); }
+.ct-tool-badge--maxmsp,
+.ct-tool-badge--max-msp          { background: var(--tool-max-bg);    color: var(--tool-max); }
+.ct-tool-badge--unity            { background: var(--tool-unity-bg);  color: var(--tool-unity); }
+.ct-tool-badge--default          { background: var(--tool-default-bg);color: var(--tool-default); }
+
+/* ============================================================
+   TOOL FILTER PILLS  (archive page)
+   ============================================================ */
+.ct-tool-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ct-tool-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: transform 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+}
+
+.ct-tool-pill:hover,
+.ct-tool-pill.active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.ct-tool-pill--all             { background: var(--ct-dark); color: white; border-color: var(--ct-dark); }
+.ct-tool-pill--after-effects   { background: var(--tool-ae-bg);     color: var(--tool-ae);      border-color: var(--tool-ae); }
+.ct-tool-pill--touchdesigner   { background: var(--tool-td);        color: var(--tool-td-accent);border-color: var(--tool-td-accent); }
+.ct-tool-pill--photoshop       { background: var(--tool-ps-bg);     color: var(--tool-ps);      border-color: var(--tool-ps); }
+.ct-tool-pill--bare-conductive,
+.ct-tool-pill--arduino         { background: var(--tool-arduino-bg);color: var(--tool-arduino); border-color: var(--tool-arduino); }
+.ct-tool-pill--blender         { background: var(--tool-blender-bg);color: var(--tool-blender); border-color: var(--tool-blender); }
+.ct-tool-pill--python          { background: var(--tool-python-bg); color: var(--tool-python);  border-color: var(--tool-python); }
+.ct-tool-pill--maxmsp,
+.ct-tool-pill--max-msp         { background: var(--tool-max-bg);    color: var(--tool-max);     border-color: var(--tool-max); }
+.ct-tool-pill--unity           { background: var(--tool-unity-bg);  color: var(--tool-unity);   border-color: var(--tool-unity); }
+
+/* ============================================================
+   DIFFICULTY QUICK FILTER BUTTONS
+   ============================================================ */
+.ct-difficulty-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ct-difficulty-filters a {
+    padding: 7px 18px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ct-difficulty-filters a:hover,
+.ct-difficulty-filters a.active  { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+.ct-difficulty-filters a.all             { background: #f3f4f6; color: var(--ct-dark); border-color: #d1d5db; }
+.ct-difficulty-filters a.getting-started { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+.ct-difficulty-filters a.beginner        { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+.ct-difficulty-filters a.intermediate    { background: #fef9c3; color: #854d0e; border-color: #fde047; }
+.ct-difficulty-filters a.advanced        { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+/* ============================================================
+   FILTER BAR
+   ============================================================ */
+.ct-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    padding: 20px;
+    background: var(--ct-white);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 32px;
+}
+
+.ct-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 160px;
+}
+
+.ct-filter-group label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ct-muted);
+}
+
+.ct-filter-group select {
+    padding: 9px 36px 9px 14px;
+    border: 1.5px solid var(--ct-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--ct-text);
+    background: var(--ct-white);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ct-filter-group select:focus {
+    outline: none;
+    border-color: var(--ct-blue);
+    box-shadow: 0 0 0 3px rgba(0,168,225,0.15);
+}
+
+/* ============================================================
+   META ROW
+   ============================================================ */
+.ct-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.ct-meta__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--ct-muted);
+    background: var(--ct-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* ============================================================
+   TUTORIAL CARDS
+   ============================================================ */
+.ct-card {
+    background: var(--ct-white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ct-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.13);
+}
+
+.ct-card__image {
+    width: 100%;
+    height: 195px;
+    object-fit: cover;
+}
+
+.ct-card__placeholder {
+    width: 100%;
+    height: 195px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    background: var(--ct-gradient);
+}
+
+.ct-card__body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ct-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.ct-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 10px;
+    color: var(--ct-dark);
+}
+
+.ct-card__title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.ct-card__title a:hover { color: var(--ct-blue); }
+
+.ct-card__excerpt {
+    font-size: 0.875rem;
+    color: var(--ct-muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.ct-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px solid var(--ct-border);
+    font-size: 12px;
+    color: var(--ct-muted);
+}
+
+.ct-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.ct-tag {
+    background: var(--ct-light);
+    color: var(--ct-text);
+    padding: 3px 9px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ct-tag:hover { background: var(--ct-blue); color: white; }
+
+/* ============================================================
+   SINGLE TUTORIAL PAGE
+   ============================================================ */
+.ct-single-header {
+    padding: 36px 0 28px;
+    border-bottom: 2px solid var(--ct-border);
+    margin-bottom: 36px;
+}
+
+.ct-featured-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 28px;
+}
+
+.ct-box {
+    background: var(--ct-light);
+    border-left: 4px solid var(--ct-blue);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    margin: 28px 0;
+}
+
+.ct-box h3 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ct-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ct-box ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.ct-box li {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+/* Tutorial body typography */
+.ct-body h2 {
+    font-size: 1.55rem;
+    font-weight: 800;
+    margin: 40px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ct-border);
+    color: var(--ct-dark);
+}
+
+.ct-body h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 28px 0 10px;
+    color: var(--ct-dark);
+}
+
+.ct-body p {
+    line-height: 1.8;
+    margin-bottom: 18px;
+    color: var(--ct-text);
+    font-size: 1rem;
+}
+
+.ct-body img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 20px 0;
+    cursor: zoom-in;
+}
+
+.ct-body pre {
+    background: #1e2738;
+    color: #e2e8f0;
+    padding: 24px;
+    border-radius: 10px;
+    overflow-x: auto;
+    position: relative;
+    margin: 24px 0;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    font-family: 'DM Mono', 'Courier New', monospace;
+}
+
+.ct-body code {
+    background: #edf2f7;
+    color: #c53030;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-family: 'DM Mono', 'Courier New', monospace;
+}
+
+.ct-body pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+.ct-body ul,
+.ct-body ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+    line-height: 1.8;
+}
+
+.ct-body li { margin-bottom: 6px; }
+
+.ct-body blockquote {
+    border-left: 4px solid var(--ct-blue);
+    padding: 14px 20px;
+    margin: 24px 0;
+    background: #eff8ff;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--ct-muted);
+}
+
+.ct-body a {
+    color: var(--ct-blue);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.2s;
+}
+
+.ct-body a:hover { text-decoration-color: var(--ct-blue); }
+
+/* Copy code button */
+.ct-copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--ct-blue);
+    color: white;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.ct-copy-btn:hover { background: var(--ct-blue-dark); }
+
+/* ============================================================
+   READING PROGRESS BAR
+   ============================================================ */
+.ct-progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--ct-gradient);
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.ct-back-top {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 44px; height: 44px;
+    background: var(--ct-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, background 0.2s;
+    z-index: 1000;
+    box-shadow: 0 4px 16px rgba(0,168,225,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ct-back-top.visible { opacity: 1; visibility: visible; }
+.ct-back-top:hover   { background: var(--ct-blue-dark); }
+
+/* ============================================================
+   COMMENTS
+   ============================================================ */
+.ct-comments { margin-top: 52px; padding-top: 40px; border-top: 2px solid var(--ct-border); }
+
+.ct-comments .comment {
+    background: var(--ct-light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.ct-comments .comment-author b { font-weight: 700; color: var(--ct-dark); }
+.ct-comments .comment-metadata { font-size: 12px; color: var(--ct-muted); margin-bottom: 10px; display: block; }
+
+.ct-comments #commentform input[type="text"],
+.ct-comments #commentform input[type="email"],
+.ct-comments #commentform textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--ct-border);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    margin-bottom: 14px;
+    font-family: inherit;
+}
+
+.ct-comments #commentform input:focus,
+.ct-comments #commentform textarea:focus {
+    outline: none;
+    border-color: var(--ct-blue);
+    box-shadow: 0 0 0 3px rgba(0,168,225,0.15);
+}
+
+.ct-comments #commentform textarea { min-height: 140px; resize: vertical; }
+
+.ct-comments #commentform #submit {
+    background: var(--ct-gradient);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    font-family: inherit;
+}
+
+.ct-comments #commentform #submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .ct-filters           { flex-direction: column; }
+    .ct-filter-group      { width: 100%; }
+    .ct-tool-pills        { gap: 6px; }
+    .ct-tool-pill         { font-size: 12px; padding: 6px 12px; }
+    .ct-difficulty-filters a { font-size: 12px; padding: 6px 12px; }
+    .ct-body pre          { padding: 16px; font-size: 0.8rem; }
+    .ct-featured-image    { max-height: 240px; }
+    .ct-back-top          { width: 38px; height: 38px; font-size: 16px; }
+}
