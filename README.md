@@ -1,4 +1,4 @@
-# Easy Tutorials WordPress Plugin
+<h1 align="center">Easy Tutorials</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="Version">
