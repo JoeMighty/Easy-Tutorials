@@ -25,21 +25,63 @@
         btn.on('click', () => $('html, body').animate({ scrollTop: 0 }, 600));
     }
 
-    /* ── Code Copy Buttons ────────────────────────────────── */
+    /* -- Code Copy Buttons ----------------------------------------- */
     function initCodeCopy() {
-        $('.ct-body pre, .tutorial-body pre').each(function () {
-            const pre = $(this);
+        // Target every <pre> on the page — covers the widget wrapper (.ct-body),
+        // Gutenberg Code blocks (.wp-block-code pre), Classic Editor, and any
+        // other code blocks that may appear inside or outside the widget.
+        $('pre').each(function () {
+            var pre = $(this);
             if ( pre.find('.ct-copy-btn').length ) return;
-            const btn = $('<button class="ct-copy-btn">Copy</button>');
+
+            // Respect the widget setting if the pre is inside a .ct-body wrapper
+            var wrapper     = pre.closest('[data-copy]');
+            var copyEnabled = wrapper.length ? wrapper.data('copy') : 'yes';
+            if ( copyEnabled === 'no' ) return;
+
+            var copyLabel   = (wrapper.length && wrapper.data('copy-label'))   ? wrapper.data('copy-label')   : 'Copy';
+            var copiedLabel = (wrapper.length && wrapper.data('copied-label')) ? wrapper.data('copied-label') : 'Copied!';
+
+            var btn = $('<button class="ct-copy-btn" aria-label="Copy code"></button>').text(copyLabel);
+
             btn.on('click', function () {
-                const text = pre.find('code').text() || pre.text();
-                navigator.clipboard && navigator.clipboard.writeText(text).then(() => {
-                    btn.text('Copied!');
-                    setTimeout(() => btn.text('Copy'), 2000);
-                });
+                var text = pre.find('code').text() || pre.text();
+                if ( navigator.clipboard ) {
+                    navigator.clipboard.writeText(text)
+                        .then(function () {
+                            btn.text(copiedLabel);
+                            setTimeout(function () { btn.text(copyLabel); }, 2000);
+                        })
+                        .catch(function () { fallbackCopy(text, btn, copyLabel, copiedLabel); });
+                } else {
+                    fallbackCopy(text, btn, copyLabel, copiedLabel);
+                }
             });
-            pre.css('position', 'relative').prepend(btn);
+
+            // Ensure the pre is positioned so the absolute button sits inside it
+            if ( pre.css('position') === 'static' ) {
+                pre.css('position', 'relative');
+            }
+            pre.prepend(btn);
         });
+    }
+
+    /* -- Clipboard fallback for older browsers / non-HTTPS ---------- */
+    function fallbackCopy(text, btn, copyLabel, copiedLabel) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            btn.text(copiedLabel);
+            setTimeout(function () { btn.text(copyLabel); }, 2000);
+        } catch(e) {
+            btn.text('Failed');
+            setTimeout(function () { btn.text(copyLabel); }, 2000);
+        }
+        document.body.removeChild(ta);
     }
 
     /* ── Auto Table of Contents ───────────────────────────── */

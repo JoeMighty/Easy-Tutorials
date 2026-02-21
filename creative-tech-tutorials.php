@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:       Easy Tutorials
- * Plugin URI:        https://github.com/JoeMighty/creative-tech-tutorials
+ * Plugin URI:        https://github.com/JoeMighty/Easy-Tutorials
  * Description:       A complete tutorial management system for creative technology educators. Adds a Tutorial post type with difficulty levels, tools, categories and tags, custom meta fields, view tracking, Elementor widgets, and Elementor Theme Builder integration.
- * Version:           1.0.0
+ * Version:           1.1.2
  * Requires at least: 6.5
  * Requires PHP:      8.1
  * Author:            Jobin Bennykutty
@@ -16,7 +16,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'CTT_VERSION', '1.0.0' );
+define( 'CTT_VERSION', '1.1.2' );
 define( 'CTT_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'CTT_URL',     plugin_dir_url( __FILE__ ) );
 
@@ -33,7 +33,7 @@ function ctt_enqueue_assets() {
         [], CTT_VERSION
     );
     wp_enqueue_script( 'ctt-scripts', CTT_URL . 'assets/js/main.js', [ 'jquery' ], CTT_VERSION, true );
-    wp_localize_script( 'ctt-scripts', 'CTT', [
+    wp_localize_script( 'ctt-scripts', 'CT', [
         'archive_url' => get_post_type_archive_link( 'tutorial' ),
         'is_single'   => is_singular( 'tutorial' ),
     ] );
@@ -516,8 +516,8 @@ function ctt_force_theme_builder( $need_override, $location ) {
 add_action( 'elementor/elements/categories_registered', 'ctt_register_elementor_category' );
 
 function ctt_register_elementor_category( $elements_manager ) {
-    $elements_manager->add_category( 'creative-tutorials', [
-        'title' => __( 'Creative Tutorials', 'easy-tutorials' ),
+    $elements_manager->add_category( 'easy-tutorials', [
+        'title' => __( 'Easy Tutorials', 'easy-tutorials' ),
         'icon'  => 'fa fa-book',
     ] );
 }

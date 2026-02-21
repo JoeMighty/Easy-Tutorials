@@ -1,7 +1,7 @@
-<h1 align="center">Easy Tutorials WordPress Plugin</h1>
+# Easy Tutorials
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.1.2-blue?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/WordPress-6.5%2B-21759b?style=flat-square&logo=wordpress&logoColor=white" alt="WordPress">
   <img src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=flat-square&logo=php&logoColor=white" alt="PHP">
   <img src="https://img.shields.io/badge/Elementor-Pro%20required-e2003b?style=flat-square" alt="Elementor Pro">
