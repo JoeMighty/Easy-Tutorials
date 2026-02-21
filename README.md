@@ -54,13 +54,13 @@
 
 ## Installation
 
-1. Download the latest release zip from the [Releases](https://github.com/JoeMighty/creative-tech-tutorials/releases) page
+1. Download the latest release zip from the [Releases](https://github.com/JoeMighty/Easy-Tutorials/releases) page
 2. In WordPress admin go to **Plugins → Add New → Upload Plugin**
 3. Upload the zip and click **Activate**
 4. The **Tutorials** menu will appear in your admin sidebar
 
 > **Or install manually:**
-> Upload the `creative-tech-tutorials` folder to `/wp-content/plugins/` and activate via the Plugins screen.
+> Upload the `easy-tutorials` folder to `/wp-content/plugins/` and activate via the Plugins screen.
 
 ---
 
@@ -123,6 +123,22 @@ Yes — go to **Tutorials → Tools & Software** or **Tutorials → Difficulty L
 ---
 
 ## Changelog
+
+### 1.1.2
+- Fixed JavaScript namespace mismatch (`CTT` → `CT`) that broke copy-to-clipboard on code blocks
+- Fixed code block contrast — dark theme applied so code text is always visible
+
+### 1.1.1
+- Fixed Elementor widget styles being overridden by active theme stylesheets
+- Added backwards-compatible function aliases for external code referencing older function names
+
+### 1.1.0
+- Plugin renamed from **Creative Tech Tutorials** to **Easy Tutorials**
+- Added `README.md` and `.pot` language file
+- Dark-themed code blocks with copy-to-clipboard button on all `<pre>` tags
+- Elementor styling controls for code blocks
+- WordPress.org Plugin Check compliance (escaping, sanitization, nonce usage)
+- Static version numbers for asset handles
 
 ### 1.0.0
 - Initial release
